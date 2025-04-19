@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 1e6bc80cd41a39f4ebacf0cb147d10ef
+guid: f3cb7981ce20d1a47814bb803d57b797
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6602966838755796383
-    second: Cow_0
+      213: 5336855417275088078
+    second: Chicken_0
   - first:
-      213: -7810360661050545635
-    second: Cow_1
+      213: -1433109330887674863
+    second: Chicken_1
   - first:
-      213: -5649190053744765936
-    second: Cow_2
+      213: -1642514149361250337
+    second: Chicken_2
   - first:
-      213: 5381308046820054851
-    second: Cow_3
+      213: -6988750562667468047
+    second: Chicken_3
   - first:
-      213: 233196760879365070
-    second: Cow_4
+      213: 4026655516392716245
+    second: Chicken_4
   - first:
-      213: 7310265595406814304
-    second: Cow_5
+      213: -6345772648950153054
+    second: Chicken_5
   - first:
-      213: -1331277352060138271
-    second: Cow_6
+      213: -8344449698215653345
+    second: Chicken_6
   - first:
-      213: -4127738214500706763
-    second: Cow_7
+      213: 945601522810511336
+    second: Chicken_7
   - first:
-      213: 8177580864935773083
-    second: Cow_8
+      213: -6077634138847768226
+    second: Chicken_8
   - first:
-      213: -4953434846425098477
-    second: Cow_9
+      213: -1196431076876613872
+    second: Chicken_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,14 +140,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cow_0
+      name: Chicken_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 2
+        y: 18
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -155,21 +155,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32adadb653deb41488d05dd79342c418
-      internalID: 2096920163
+      spriteID: 09859e919b9184d429db7d9c0cbe78fd
+      internalID: -119192229
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_1
+      name: Chicken_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 18
+        y: 18
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -177,21 +177,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 277f0573d75eea842ba4413bd6890442
-      internalID: 779645640
+      spriteID: 7777332515759d540a58dae34c496186
+      internalID: -1699291186
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_2
+      name: Chicken_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 34
+        y: 18
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -199,21 +199,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84da2dbd8901bfe4a87c0779619e7e3b
-      internalID: 788331940
+      spriteID: 7ae4a5ac553af7d478b13a132eed0122
+      internalID: 73537151
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_3
+      name: Chicken_3
       rect:
         serializedVersion: 2
-        x: 101
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 50
+        y: 18
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -221,21 +221,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f020a1588d8cea74a92331e3ec3b70c1
-      internalID: -1570955441
+      spriteID: 82551b0d937a72f47be29c0ef4dccb9a
+      internalID: 1639646861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_4
+      name: Chicken_4
       rect:
         serializedVersion: 2
-        x: 5
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 2
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -243,21 +243,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af4d78b801af83f4f9276183de699af8
-      internalID: 280869644
+      spriteID: 5f8454fa11c776143b41a507efa16ee7
+      internalID: 888316873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_5
+      name: Chicken_5
       rect:
         serializedVersion: 2
-        x: 37
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 18
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -265,21 +265,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cc40ad7fdebcb04798197c849578290
-      internalID: -906599904
+      spriteID: 45e04f82278bc0547ab161308bb89729
+      internalID: 1905902973
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_6
+      name: Chicken_6
       rect:
         serializedVersion: 2
-        x: 69
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 34
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -287,21 +287,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b7fbbdb756cb334195995104c122caf
-      internalID: 1535027027
+      spriteID: 12e09e6a6d1facb41a87fc41f0ffb3e8
+      internalID: -1952675575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_7
+      name: Chicken_7
       rect:
         serializedVersion: 2
-        x: 101
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 49
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -309,21 +309,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 949c78e8d822066479ff2dca541b0e47
-      internalID: -1723095482
+      spriteID: f0d4530d6cfc3ff44b0d3bb1556f5734
+      internalID: 1781235364
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_8
+      name: Chicken_8
       rect:
         serializedVersion: 2
-        x: 133
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 65
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -331,21 +331,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb1f1de50e975af4a948513779283dbd
-      internalID: -1828211230
+      spriteID: d09fb8a6bfc81214a8727804c50d07bc
+      internalID: 1686806268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_9
+      name: Chicken_9
       rect:
         serializedVersion: 2
-        x: 165
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 81
+        y: 2
+        width: 11
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -353,8 +353,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 426bb203c643fbb41b4fd243ff4a1982
-      internalID: 280251306
+      spriteID: 9bdab7d8039cff6439b7ede3f7943de3
+      internalID: 133497509
       vertices: []
       indices: 
       edges: []
@@ -363,7 +363,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e0a4441222a635243be46ac77a8d8fac
+    spriteID: 355bceb30c9b09b40ae72dbb642e23b2
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cow_0: 2096920163
-      Cow_1: 779645640
-      Cow_2: 788331940
-      Cow_3: -1570955441
-      Cow_4: 280869644
-      Cow_5: -906599904
-      Cow_6: 1535027027
-      Cow_7: -1723095482
-      Cow_8: -1828211230
-      Cow_9: 280251306
+      Chicken_0: -119192229
+      Chicken_1: -1699291186
+      Chicken_2: 73537151
+      Chicken_3: 1639646861
+      Chicken_4: 888316873
+      Chicken_5: 1905902973
+      Chicken_6: -1952675575
+      Chicken_7: 1781235364
+      Chicken_8: 1686806268
+      Chicken_9: 133497509
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 1e6bc80cd41a39f4ebacf0cb147d10ef
+guid: 3eeae26d694ae724e92f9760d8a98854
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6602966838755796383
-    second: Cow_0
+      213: -4604307202144505254
+    second: Calf_0
   - first:
-      213: -7810360661050545635
-    second: Cow_1
+      213: 2391728856914062138
+    second: Calf_1
   - first:
-      213: -5649190053744765936
-    second: Cow_2
+      213: 4763666626302214573
+    second: Calf_2
   - first:
-      213: 5381308046820054851
-    second: Cow_3
+      213: -6043277937924604368
+    second: Calf_3
   - first:
-      213: 233196760879365070
-    second: Cow_4
+      213: -94554750264717975
+    second: Calf_4
   - first:
-      213: 7310265595406814304
-    second: Cow_5
+      213: 5091440611178085526
+    second: Calf_5
   - first:
-      213: -1331277352060138271
-    second: Cow_6
+      213: -967572439855227483
+    second: Calf_6
   - first:
-      213: -4127738214500706763
-    second: Cow_7
+      213: -3149394672158030158
+    second: Calf_7
   - first:
-      213: 8177580864935773083
-    second: Cow_8
+      213: -6710505257270055645
+    second: Calf_8
   - first:
-      213: -4953434846425098477
-    second: Cow_9
+      213: 5081174526437014166
+    second: Calf_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -140,14 +140,14 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cow_0
+      name: Calf_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 7
+        y: 42
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -155,21 +155,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 32adadb653deb41488d05dd79342c418
-      internalID: 2096920163
+      spriteID: 9281e4ac088be9f40adee9016d7ccd1a
+      internalID: -763951573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_1
+      name: Calf_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 39
+        y: 42
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -177,21 +177,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 277f0573d75eea842ba4413bd6890442
-      internalID: 779645640
+      spriteID: 368917ef8f0780e45aca929146730a4c
+      internalID: 1063618874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_2
+      name: Calf_2
       rect:
         serializedVersion: 2
-        x: 69
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 71
+        y: 42
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -199,21 +199,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84da2dbd8901bfe4a87c0779619e7e3b
-      internalID: 788331940
+      spriteID: bf58acadeebc24748bfffac446dc7c23
+      internalID: 867017861
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_3
+      name: Calf_3
       rect:
         serializedVersion: 2
-        x: 101
-        y: 41
-        width: 21
-        height: 15
-      alignment: 9
+        x: 103
+        y: 42
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -221,21 +221,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f020a1588d8cea74a92331e3ec3b70c1
-      internalID: -1570955441
+      spriteID: ae86c0872229ef841aeacb413e1430b9
+      internalID: 1452609678
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_4
+      name: Calf_4
       rect:
         serializedVersion: 2
-        x: 5
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 7
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -243,21 +243,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af4d78b801af83f4f9276183de699af8
-      internalID: 280869644
+      spriteID: cd9d3d37ac2985d468fcb30e2ba21523
+      internalID: -1234071622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_5
+      name: Calf_5
       rect:
         serializedVersion: 2
-        x: 37
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 39
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -265,21 +265,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0cc40ad7fdebcb04798197c849578290
-      internalID: -906599904
+      spriteID: a854744c99c143649b0ce1962e881598
+      internalID: -2068521140
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_6
+      name: Calf_6
       rect:
         serializedVersion: 2
-        x: 69
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 71
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -287,21 +287,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1b7fbbdb756cb334195995104c122caf
-      internalID: 1535027027
+      spriteID: 38a9f502219c0644481884a298d62aca
+      internalID: 464170552
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_7
+      name: Calf_7
       rect:
         serializedVersion: 2
-        x: 101
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 103
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -309,21 +309,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 949c78e8d822066479ff2dca541b0e47
-      internalID: -1723095482
+      spriteID: 9ac6b4de5ee0d7e4ca1baa4da2213f23
+      internalID: -1363079994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_8
+      name: Calf_8
       rect:
         serializedVersion: 2
-        x: 133
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 135
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -331,21 +331,21 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bb1f1de50e975af4a948513779283dbd
-      internalID: -1828211230
+      spriteID: 761af094a9165494a9a2c16559211a82
+      internalID: -1766266018
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cow_9
+      name: Calf_9
       rect:
         serializedVersion: 2
-        x: 165
-        y: 9
-        width: 21
-        height: 15
-      alignment: 9
+        x: 167
+        y: 10
+        width: 17
+        height: 12
+      alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
@@ -353,8 +353,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 426bb203c643fbb41b4fd243ff4a1982
-      internalID: 280251306
+      spriteID: c5bc96490551b8045bf94ef0e20b16f5
+      internalID: -1009350517
       vertices: []
       indices: 
       edges: []
@@ -363,7 +363,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e0a4441222a635243be46ac77a8d8fac
+    spriteID: 02cdb62f46b8f82458e709e6b23c9965
     internalID: 0
     vertices: []
     indices: 
@@ -373,16 +373,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Cow_0: 2096920163
-      Cow_1: 779645640
-      Cow_2: 788331940
-      Cow_3: -1570955441
-      Cow_4: 280869644
-      Cow_5: -906599904
-      Cow_6: 1535027027
-      Cow_7: -1723095482
-      Cow_8: -1828211230
-      Cow_9: 280251306
+      Calf_0: -763951573
+      Calf_1: 1063618874
+      Calf_2: 867017861
+      Calf_3: 1452609678
+      Calf_4: -1234071622
+      Calf_5: -2068521140
+      Calf_6: 464170552
+      Calf_7: -1363079994
+      Calf_8: -1766266018
+      Calf_9: -1009350517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

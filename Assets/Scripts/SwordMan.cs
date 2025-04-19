@@ -1,42 +1,65 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-
+using System;
+using System.Threading.Tasks;
+using System.Collections;
+using UnityEditor;
+using System.Linq;
 public class SwordMan : MonoBehaviour , IUnit
 {
 
     Animator animator;
-    Rigidbody2D rgbd2D;
+    AnimatorStateInfo stateInfo;
 
-    bool attackDone;
+    // AI不會用到 手動要用的
+    Rigidbody2D rgbd2D; 
+
+    bool AttackDone;
     bool isMoving;
+
+    // 是否鎖定目標 是的話繼續追牛 否的話代表回到倉庫
+    public bool TargetLock { get; set; }
+
     Vector3 moveDir;
-
     const float MOVE_SPEED = 5f;
+    Vector3 position;
 
-
-
+    public event EventHandler OnArrivedSotrage;
     
 
-    private void Start()
+    private void Awake()
     {
-        
+
         animator = GetComponent<Animator>();
         rgbd2D = GetComponent<Rigidbody2D>();
 
-        attackDone = true;
+        AttackDone = true;
         isMoving = false;
+        TargetLock = false;
         moveDir = Vector3.zero;
-
+        position = transform.position;
     }
+    /*
+    private void FixedUpdate()
+    {
+        if (isMoving)
+        {
+            rgbd2D.linearVelocity = moveDir * MOVE_SPEED;
+        }
+        else
+        {
+            rgbd2D.linearVelocity = Vector2.zero;
+        }
+    }
+    */
 
-    
     private void Update()
     {
         // HandleManualAnimator();
-
-
+        HandleMovement();
 
     }
+
 
     private void HandleManualAnimator()
     {
@@ -69,10 +92,10 @@ public class SwordMan : MonoBehaviour , IUnit
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && attackDone)
+        if (Input.GetKeyDown(KeyCode.Space) && AttackDone)
         {
             animator.SetTrigger("Attack");
-            attackDone = false; // 設置為 false，防止重複觸發
+            AttackDone = false; // 設置為 false，防止重複觸發
         }
 
         moveDir = new Vector2(moveX, moveY).normalized;
@@ -81,8 +104,9 @@ public class SwordMan : MonoBehaviour , IUnit
 
         if (isMoving)
         {
-
-            animator.SetFloat("movingFloatForAttack", 1f);
+            rgbd2D.linearVelocity = moveDir * MOVE_SPEED;
+            animator.SetFloat("AttackOrWalkAttack" , 1f);
+            
             animator.SetFloat("Horizontal", moveDir.x);
             animator.SetFloat("Vertical", moveDir.y);
             animator.SetBool("isMoving", true);
@@ -90,43 +114,168 @@ public class SwordMan : MonoBehaviour , IUnit
         else
         {
             rgbd2D.linearVelocity = Vector2.zero;
-            animator.SetFloat("movingFloatForAttack", 0f);
+            animator.SetFloat("AttackOrWalkAttack", 0f);
             animator.SetBool("isMoving", false);
         }
 
         // 檢查動畫是否結束
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        if (stateInfo.IsName("AttackBlendTree") && stateInfo.normalizedTime >= .99f) // stateInfo.normalizedTime 接近 1
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("AttackBlenderTree") && stateInfo.normalizedTime >= .99f) // stateInfo.normalizedTime 接近 1
         {
-            attackDone = true;
+            AttackDone = true;
         }
     }
 
-    private void FixedUpdate()
+    private void HandleMovement()
     {
-        if (isMoving)
+
+        Vector3 dir = (position - transform.position).normalized;
+        float moveSpeed = 2f;
+        float distance = Vector3.Distance(transform.position, position);
+
+        if (distance >= 0f)
         {
-            rgbd2D.linearVelocity = moveDir * MOVE_SPEED;
-        }
-        else
-        {
-            rgbd2D.linearVelocity = Vector2.zero;
+            Vector3 newPosition = transform.position + dir * moveSpeed * Time.deltaTime;
+            float newDistance = Vector3.Distance(newPosition, position);
+
+            if (newDistance > distance)
+            {
+                newPosition = position;
+            }
+
+            transform.position = newPosition;
+
         }
     }
 
+
+    /// <summary>
+    /// 判斷是不是在 Idle 動畫
+    /// </summary>
     public bool IsIdle()
     {
-        return !isMoving;
+        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsName("IdleBlenderTree");
     }
 
-    public void MoveTo(Vector3 position)
+    public void MoveTo(Vector3 stopPosition , float stopDistance , Action action)
     {
-        
+        if (stopPosition.x > transform.position.x)
+        {
+            animator.SetFloat("Horizontal", 1f);
+        }
+        else if (stopPosition.x <= transform.position.x)
+        {
+            animator.SetFloat("Horizontal", -1f);
+        }
+
+        if(stopPosition.y > transform.position.y)
+        {
+            animator.SetFloat("Vertical", 1f);
+        }
+        else if (stopPosition.y <= transform.position.y)
+        {
+            animator.SetFloat("Vertical", -1f);
+        }
+
+        animator.SetBool("isMoving", true);
+        isMoving = true;
+
+        Vector3 dir = (stopPosition - transform.position).normalized;
+        float distance = Vector3.Distance(transform.position, stopPosition);
+        distance -= stopDistance;
+        position = transform.position + dir * distance;
+        StartCoroutine(MoveToCoroutine(action));
+
     }
 
-    public void PlayAnimation()
+    private IEnumerator MoveToCoroutine(Action action)
     {
         
+        while (transform.position != position)
+        {
+            yield return null;
+        }
+
+        if(TargetLock)
+        {
+            TargetLock = false;
+            OnArrivedSotrage?.Invoke(this, EventArgs.Empty);
+            
+        }
+        
+        animator.SetBool("isMoving", false);
+        isMoving = false;
+
+        action?.Invoke();
+
+    }
+
+
+    // 播放揮砍動畫
+    public void PlaySlayAnimation(Transform LookAt, Action onAnimationCompleted)
+    {
+        Vector3 LookAtPostion = LookAt.position;
+        if (LookAtPostion.x > transform.position.x)
+        {
+            animator.SetFloat("Horizontal", 1f);
+        }
+        else if (LookAtPostion.x <= transform.position.x)
+        {
+            animator.SetFloat("Horizontal", -1f);
+        }
+
+        if (LookAtPostion.y > transform.position.y)
+        {
+            animator.SetFloat("Vertical", 1f);
+        }
+        else if (LookAtPostion.y <= transform.position.y)
+        {
+            animator.SetFloat("Vertical", -1f);
+        }
+
+        AttackDone = false;
+        animator.SetTrigger("Attack");
+        StartCoroutine(Cow_OnDamaged_Coroutine(LookAt));
+        StartCoroutine(PlaySlayAnimationCoroutine(onAnimationCompleted));
+
+    }
+
+
+    // 揮砍的動畫完整時間是1f 砍的時間是0.5 回饋時間 0.25
+    private IEnumerator Cow_OnDamaged_Coroutine(Transform LooAt)
+    {
+
+        yield return new WaitForSeconds(.5f);
+        LooAt.GetComponent<SpriteRenderer>().color = Color.red;
+
+        LooAt.GetComponent<Cow>().Damage(2);
+        yield return new WaitForSeconds(.25f);
+
+        // 傷害完 牛有可能死了
+        if (LooAt != null)
+        {
+            
+            LooAt.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+
+    private IEnumerator PlaySlayAnimationCoroutine(Action onAnimationCompleted)
+    {
+        
+        while (!AttackDone)
+        {
+            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("AttackBlenderTree") && stateInfo.normalizedTime >= .99f) // stateInfo.normalizedTime 接近 1
+            {
+                onAnimationCompleted?.Invoke();
+                AttackDone = true;
+                
+            }
+
+            yield return null;
+        }
+
     }
 }
 
