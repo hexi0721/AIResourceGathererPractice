@@ -1,6 +1,4 @@
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI.Table;
 
 public class SwordManAI : MonoBehaviour
 {

@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using System;
-using System.Threading.Tasks;
 using System.Collections;
-using UnityEditor;
-using System.Linq;
+
 public class SwordMan : MonoBehaviour , IUnit
 {
 
