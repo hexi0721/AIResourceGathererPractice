@@ -34,15 +34,14 @@ public class TAS_Building
         tick++;
         float tickNormalize = tick * 1f / tickMax;
         
-        if (tick <= tickMax)
+        if (tick < tickMax)
         {
             if(tickNormalize >= .5f) gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("building2");
-            if (tickNormalize >= 1f) gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("building3");
-
             childBar.localScale = new Vector3(tickNormalize , childBar.localScale.y);
         }
         else
         {
+            gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("building3");
             TickTimeSystem.OnTick -= TickTimeSystem_OnTick;
             childBar.parent.gameObject.SetActive(false);
         }
@@ -56,7 +55,7 @@ public class TAS_Building
         barObj.transform.localScale = localScale;
         barObj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Bar");
         barObj.GetComponent<SpriteRenderer>().color = (Color)backgroundColor;
-        barObj.GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("UI");
+        barObj.GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Bar");
 
         GameObject barChildObj = new GameObject("World_BarChild", typeof(SpriteRenderer));
         barChildObj.transform.SetParent(barObj.transform);
@@ -64,7 +63,7 @@ public class TAS_Building
         barChildObj.transform.localScale = new Vector3(0, 1);
         barChildObj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Bar");
         barChildObj.GetComponent<SpriteRenderer>().color = (Color)barColor;
-        barChildObj.GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("UI");
+        barChildObj.GetComponent<SpriteRenderer>().sortingLayerID = SortingLayer.NameToID("Bar");
         barChildObj.GetComponent<SpriteRenderer>().sortingOrder = 1;
 
         return barChildObj.transform;

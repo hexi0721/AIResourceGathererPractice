@@ -60,7 +60,6 @@ public class SwordManAI : MonoBehaviour
                     unit.PlaySlayAnimation(cow.transform , () =>
                     {
                         // 這裡是動畫完整結束做的事
-                        //cow.Damage(2);
                         
                         Amount += 1;
                         if (Amount >= 3)
@@ -83,6 +82,7 @@ public class SwordManAI : MonoBehaviour
                 storagePostion = GameHandler.GetStoragePosition_Static();
                 unit.MoveTo(storagePostion, 1f, () =>
                 {
+                    Meat.AddMeat(Amount);
                     Amount = 0;
                     state = State.Idle;
                 });

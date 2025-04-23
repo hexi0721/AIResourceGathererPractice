@@ -10,10 +10,17 @@ public class TAS_GameHandler : MonoBehaviour
     {
         spriteRenderer.GetComponent<SpriteRenderer>().color = GetColorFromString("FF000030");
 
+        /*
         Debug.Log(GetStringFromColor(new Color(1, 1, 1, 0.7f) , true));
         Debug.Log(HexToFloatNormalize("FF"));
         Debug.Log(FloatToHexNormalize(1));
-    } 
+        */
+    }
+
+    private void Start()
+    {
+        TickTimeSystem.Create();
+    }
 
     private void Update()
     {

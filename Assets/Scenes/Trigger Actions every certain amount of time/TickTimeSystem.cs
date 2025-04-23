@@ -1,28 +1,39 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using UnityEditor.SceneManagement;
 
-public class TickTimeSystem : MonoBehaviour
+public static class TickTimeSystem
 {
 
     public static event EventHandler OnTick;
 
-    int tick;
     private const float Tick_Time_MAX = .5f;
-    private float tickTime;
 
-    private void Update()
+    private static GameObject tickTimeSystemObject;
+
+    public static void Create()
     {
-        tickTime += Time.deltaTime;
-        if(tickTime >= Tick_Time_MAX )
+        if (tickTimeSystemObject == null)
         {
-            tickTime -= Tick_Time_MAX;
-            tick++;
-
-            OnTick?.Invoke( this, EventArgs.Empty );
+            tickTimeSystemObject = new GameObject("TickTimeSystemObject");
+            tickTimeSystemObject.AddComponent<TickTimeSystemObject>();
         }
     }
 
+    private class TickTimeSystemObject: MonoBehaviour
+    {
 
+        private float tickTime;
+        private void Update()
+        {
+            tickTime += Time.deltaTime;
+            if (tickTime >= Tick_Time_MAX)
+            {
+                tickTime -= Tick_Time_MAX;
+                OnTick?.Invoke(this, EventArgs.Empty);
+            }
+        }
+    }
 
 }
