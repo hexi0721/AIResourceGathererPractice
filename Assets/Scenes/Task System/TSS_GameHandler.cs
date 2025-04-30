@@ -12,18 +12,24 @@ public class TSS_GameHandler : MonoBehaviour
         TSS_SwordMan swordMan = TSS_SwordMan.Create(pf_SwordMan, Vector3.zero);
         TSS_SwordManAI swordManAI = swordMan.GetComponent<TSS_SwordManAI>();
         swordManAI.SetUp(taskSystem);
-
+        
         swordMan = TSS_SwordMan.Create(pf_SwordMan, Vector3.zero);
         swordManAI = swordMan.GetComponent<TSS_SwordManAI>();
         swordManAI.SetUp(taskSystem);
-
+        
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task() { targetPosition = Utils.GetMouseWorldPosZeroZ() };
+            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.MoveToPosition { targetPosition = Utils.GetMouseWorldPosZeroZ() };
+            taskSystem.AddTask(task);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExecuteIdle2 {  };
             taskSystem.AddTask(task);
         }
     }

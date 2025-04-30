@@ -18,7 +18,7 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
     Animator animator;
     AnimatorStateInfo stateInfo;
 
-    bool AttackDone;
+    //bool AttackDone;
     
 
     // 是否鎖定目標 是的話繼續追牛 否的話代表回到倉庫
@@ -32,7 +32,7 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
     {
         animator = GetComponent<Animator>();
 
-        AttackDone = true;
+        // AttackDone = true;
         
         TargetLock = false;
         position = transform.position;
@@ -128,7 +128,7 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
 
     }
 
-
+    Action onAnimationCompleted;
     // 播放揮砍動畫
     public void PlaySlayAnimation(Transform LookAt, Action onAnimationCompleted)
     {
@@ -151,10 +151,12 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
             animator.SetFloat("Vertical", -1f);
         }
 
-        AttackDone = false;
+        //AttackDone = false;
         animator.SetTrigger("Attack");
         StartCoroutine(Cow_OnDamaged_Coroutine(LookAt));
-        StartCoroutine(PlaySlayAnimationCoroutine(onAnimationCompleted));
+
+
+        this.onAnimationCompleted = onAnimationCompleted;
 
     }
 
@@ -177,22 +179,29 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
         }
     }
 
-    private IEnumerator PlaySlayAnimationCoroutine(Action onAnimationCompleted)
+    private void PlaySlayAnimationEnd()
     {
-        
-        while (!AttackDone)
-        {
-            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("AttackBlenderTree") && stateInfo.normalizedTime >= .99f) // stateInfo.normalizedTime 接近 1
-            {
-                onAnimationCompleted?.Invoke();
-                AttackDone = true;
-                
-            }
 
-            yield return null;
-        }
+        onAnimationCompleted?.Invoke();
+        onAnimationCompleted = null;
+        //AttackDone = true;
 
+    }
+
+    public void PlayIdle2Animation(Action onAnimationCompleted)
+    {
+        animator.SetBool("isPlayIdle2", true);
+
+        this.onAnimationCompleted = onAnimationCompleted;
+        StartCoroutine(PlayIdle2AnimationEnd());
+    }
+
+    private IEnumerator PlayIdle2AnimationEnd()
+    {
+        yield return new WaitForSeconds(.5f);
+        onAnimationCompleted?.Invoke();
+        onAnimationCompleted = null;
+        animator.SetBool("isPlayIdle2", false);
     }
 }
 

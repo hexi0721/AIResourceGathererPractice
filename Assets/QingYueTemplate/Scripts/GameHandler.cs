@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class GameHandler : MonoBehaviour
 {
@@ -19,17 +18,12 @@ public class GameHandler : MonoBehaviour
     [Header("主角")]
     [SerializeField] SwordMan swordMan;
 
-    // 要傳給其他類的牛
-    [SerializeField] Cow tf;
-
     // 牛群
     List<Cow> cows;
 
-    IUnit unit;
-    
     // 生成時間
     float spawnTimer;
-    float spawnTimerMax;
+    
 
     private void Awake()
     {
@@ -41,18 +35,15 @@ public class GameHandler : MonoBehaviour
         Meat meat = new Meat();
         pfList = new List<Cow>() { pf_Cow, pf_Calf };
 
-        tf = null;
-        unit = swordMan.GetComponent<IUnit>();
-
         cows = new List<Cow>();
         SpawnCow();
         
 
         swordMan.OnArrivedSotrage += SwordMan_OnArrivedStorage;
-        SwordMan_OnArrivedStorage(this , EventArgs.Empty); // 這裡先觸發了 所以一開始才有牛牛進tf
+        SearchNextCow(); // 這裡先觸發了 所以一開始才有牛牛進tf
         
-        spawnTimerMax = 5f;
-        spawnTimer = spawnTimerMax;
+
+        
     }
 
     private void Update()
@@ -61,6 +52,8 @@ public class GameHandler : MonoBehaviour
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0f)
         {
+
+            float spawnTimerMax = 5f;
             spawnTimer += spawnTimerMax;
             SpawnCow();
         }
@@ -71,7 +64,6 @@ public class GameHandler : MonoBehaviour
     private void SwordMan_OnArrivedStorage(object sender, EventArgs e)
     {
         SearchNextCow();
-        unit.TargetLock = true;
 
     }
 
@@ -100,7 +92,7 @@ public class GameHandler : MonoBehaviour
             }
         }
 
-        tf = cows[cows.IndexOf(returenCow)];
+        swordMan.GetComponent<SwordManAI>().SetCow(cows[cows.IndexOf(returenCow)]);
     }
 
 
@@ -114,9 +106,10 @@ public class GameHandler : MonoBehaviour
 
             Cow animal = pfList[UnityEngine.Random.Range(0 ,pfList.Count)];
 
-            Cow cow = Cow.CreateCow(animal.transform, new Vector3(UnityEngine.Random.Range(-5f, 5f),UnityEngine.Random.Range(-2f, -5f)));
+            Cow cow = Cow.CreateCow(transform , animal.transform, new Vector3(UnityEngine.Random.Range(-5f, 5f),UnityEngine.Random.Range(-2f, -5f)));
 
-            cow.GetComponent<Cow>().OnDestory += Cow_OnDestory;
+            cow.OnDestory += Cow_OnDestory;
+            cow.OnClick += Cow_OnClick;
             cows.Add(cow);
         }
 
@@ -125,23 +118,22 @@ public class GameHandler : MonoBehaviour
     // 牛被催毀要做的事
     private void Cow_OnDestory(object sender, EventArgs e)
     {
-        cows.Remove(tf);
+        Cow cow = sender as Cow;
+        cows.Remove(cow);
         SearchNextCow();
 
     }
 
-    public static Cow GetCowPosition_Static()
+    // 牛被點擊要做的事
+    private void Cow_OnClick(object sender, EventArgs e)
     {
-        return instance.tf;
+        Cow cow = sender as Cow;
+        swordMan.GetComponent<SwordManAI>().SetCow(cow);
     }
 
     public static Vector3 GetStoragePosition_Static()
     {
         return instance.storage.position;
     }
-    
-
-    
-
 
 }

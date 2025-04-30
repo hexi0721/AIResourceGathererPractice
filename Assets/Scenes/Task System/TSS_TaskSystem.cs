@@ -4,10 +4,19 @@ using UnityEngine;
 public class TSS_TaskSystem
 {
     
-    public class Task
+    public abstract class Task
     {
-        public Vector3 targetPosition;
-    }
+
+        public  class MoveToPosition : Task
+        {
+            public Vector3 targetPosition;
+        }
+
+        public class ExecuteIdle2 : Task
+        {
+            
+        }
+    } 
 
 
     private List<Task> taskList;

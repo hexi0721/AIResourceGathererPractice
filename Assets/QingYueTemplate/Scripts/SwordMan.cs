@@ -201,13 +201,11 @@ public class SwordMan : MonoBehaviour , IUnit
             yield return null;
         }
 
-        if(TargetLock)
+        if (!TargetLock)
         {
-            TargetLock = false;
             OnArrivedSotrage?.Invoke(this, EventArgs.Empty);
-            
         }
-        
+
         animator.SetBool("isMoving", false);
         isMoving = false;
 
@@ -255,7 +253,7 @@ public class SwordMan : MonoBehaviour , IUnit
         LooAt.GetComponent<SpriteRenderer>().color = Color.red;
 
         UnitStat.背負肉的數量 += LooAt.GetComponent<Cow>().DamageBeforeGrabAmount(UnityEngine.Random.Range(1 , 2));
-        //LooAt.GetComponent<Cow>().Damage(UnityEngine.Random.Range(1, swordManStat.ATK));
+        
         yield return new WaitForSeconds(.25f);
 
         // 傷害完 牛有可能死了

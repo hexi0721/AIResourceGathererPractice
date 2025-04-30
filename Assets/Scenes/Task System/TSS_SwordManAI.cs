@@ -67,13 +67,30 @@ public class TSS_SwordManAI : MonoBehaviour
         else
         {
             state = State.ExecutingTask;
-            ExeuteTase(task);
+
+            if(task is TSS_TaskSystem.Task.MoveToPosition)
+            {
+                ExeuteTask_MoveToPosition(task as TSS_TaskSystem.Task.MoveToPosition);
+            }
+            else if (task is TSS_TaskSystem.Task.ExecuteIdle2)
+            {
+                ExeuteTask_Idle2(task as TSS_TaskSystem.Task.MoveToPosition);
+            }
+            
         }
     }
 
-    private void ExeuteTase(TSS_TaskSystem.Task task)
+    private void ExeuteTask_MoveToPosition(TSS_TaskSystem.Task.MoveToPosition task)
     {
         swordMan.MoveTo(task.targetPosition, () =>
+        {
+            state = State.WaitingForNextTask;
+        });
+    }
+
+    private void ExeuteTask_Idle2(TSS_TaskSystem.Task.MoveToPosition task)
+    {
+        swordMan.PlayIdle2Animation(() =>
         {
             state = State.WaitingForNextTask;
         });

@@ -3,5 +3,6 @@ using UnityEngine;
 
 public interface TSS_ISwordMan
 {
-    public void MoveTo(Vector3 targetPosition , Action OnArrivedAction = null);
+    void MoveTo(Vector3 targetPosition , Action OnArrivedAction = null);
+    void PlayIdle2Animation(Action PlayIdle2Animation = null);
 }

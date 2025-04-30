@@ -16,10 +16,21 @@ public class SwordManAI : MonoBehaviour
     Vector3 cowPostion;
     Vector3 storagePostion;
 
+    TextMesh textMesh;
+
+    Cow cow;
     private void Start()
     {
         unit = GetComponent<IUnit>();
         state = State.Idle;
+        textMesh = transform.Find("InventoryAmount").GetComponent<TextMesh>();
+        UpdateTextMesh();
+    }
+
+    private void UpdateTextMesh()
+    {
+        textMesh.text = (unit.UnitStat.背負肉的數量 > 0) ? unit.UnitStat.背負肉的數量.ToString() : "";
+
     }
 
     private void Update()
@@ -27,26 +38,31 @@ public class SwordManAI : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                cowPostion = GameHandler.GetCowPosition_Static().GetPosition();
-                state = State.MovingToCow;
+                
+                if (cow != null)
+                {
+                    state = State.MovingToCow;
+                    unit.TargetLock = true;
+                }
+                
                 break;
 
             case State.MovingToCow:
 
                 // 判斷是否直接在範圍內
-                if (Vector3.Distance(transform.position, cowPostion) <= 1.1f)
+                if (Vector3.Distance(transform.position, cow.GetPosition()) <= 1.1f)
                 {
                     state = State.PlaySlayAnimation;
                     return;
                 }
 
                 // 隨時更新位置 畢竟牛會亂跑
-                if (cowPostion != GameHandler.GetCowPosition_Static().GetPosition())
+                if (cowPostion != cow.GetPosition() && cow != null)
                 {
-                    cowPostion = GameHandler.GetCowPosition_Static().GetPosition();
+                    cowPostion = cow.GetPosition();
                 }
 
-                unit.MoveTo(cowPostion, 1f, null);
+                unit.MoveTo(cow.GetPosition(), 1f, null);
 
                 break;
 
@@ -56,10 +72,11 @@ public class SwordManAI : MonoBehaviour
                 if (unit.IsIdle())
                 {
                     // 為了將 cow 變顏色以及使用 Damage 方法
-                    Cow cow = GameHandler.GetCowPosition_Static();
+
                     unit.PlaySlayAnimation(cow.transform , () =>
                     {
                         // 這裡是動畫完整結束做的事
+                        UpdateTextMesh();
 
                         if (unit.UnitStat.背負肉的數量 >= 3)
                         {
@@ -68,9 +85,8 @@ public class SwordManAI : MonoBehaviour
                         }
 
                         // 更新位置
-                        if (cowPostion != GameHandler.GetCowPosition_Static().GetPosition())
+                        if (cowPostion != cow.GetPosition() && cow != null)
                         {
-                            cowPostion = GameHandler.GetCowPosition_Static().GetPosition();
                             state = State.MovingToCow;
                         }
                     });
@@ -79,13 +95,21 @@ public class SwordManAI : MonoBehaviour
 
             case State.MovingToStorage:
                 storagePostion = GameHandler.GetStoragePosition_Static();
+                unit.TargetLock = false;
                 unit.MoveTo(storagePostion, 1f, () =>
                 {
                     Meat.AddMeat(unit.UnitStat.背負肉的數量);
                     unit.UnitStat.背負肉的數量 = 0;
+                    UpdateTextMesh();
+                    
                     state = State.Idle;
                 });
                 break;
         }
+    }
+
+    public void SetCow(Cow cow)
+    {
+        this.cow = cow;
     }
 }

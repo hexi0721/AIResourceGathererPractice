@@ -2,20 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cow : MonoBehaviour
 {
 
     // 創造 靜態方法
-    public static Cow CreateCow(Transform pf_Cow, Vector3 spawnPosition)
+    public static Cow CreateCow(Transform FatherTransform, Transform pf_Cow, Vector3 spawnPosition)
     {
         Cow cow = Instantiate(pf_Cow, spawnPosition, Quaternion.identity).GetComponent<Cow>();
+        cow.transform.SetParent(FatherTransform);
         cow.SetUp();
         return cow;
     }
 
-    // 摧毀事件
-    public event EventHandler OnDestory; 
+
+    public event EventHandler OnDestory;
+    public event EventHandler OnClick;
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -29,11 +32,11 @@ public class Cow : MonoBehaviour
     // 骰子 用於 判斷要移動 或 休息
     private float rollTimer;
     private float rollMaxTimer;
-    
-    
+
+    private Button button;
 
     private void SetUp()
-    {
+    { 
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -43,8 +46,9 @@ public class Cow : MonoBehaviour
         rollTimer = rollMaxTimer;
 
         cowStat = new CowStat(5 , UnityEngine.Random.Range(1, 10));
-        
-        
+
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => { OnClick?.Invoke(this, EventArgs.Empty); });
     }
 
     private void Update()
