@@ -15,8 +15,10 @@ public class GameHandler : MonoBehaviour
     [Header("倉庫")]
     [SerializeField] Transform storage;
 
-    [Header("主角")]
-    [SerializeField] SwordMan swordMan;
+
+    [SerializeField] List<SwordMan> swordMans;
+    SwordManAI selectSwordMan;
+
 
     // 牛群
     List<Cow> cows;
@@ -37,10 +39,17 @@ public class GameHandler : MonoBehaviour
 
         cows = new List<Cow>();
         SpawnCow();
-        
 
-        swordMan.OnArrivedSotrage += SwordMan_OnArrivedStorage;
-        SearchNextCow(); // 這裡先觸發了 所以一開始才有牛牛進tf
+        // swordMans = new List<SwordMan>();
+        foreach (SwordMan swordMan in swordMans)
+        {
+            swordMan.OnArrivedSotrage += SwordMan_OnArrivedStorage;
+            swordMan.OnAlreadySlayCow += SwordMan_OnAlreadySlayCow;
+            swordMan.OnClick += SwordMan_OnClick;
+        }
+
+        
+        // SearchNextCow(); // 這裡先觸發了 所以一開始才有牛牛進tf
         
 
         
@@ -63,14 +72,37 @@ public class GameHandler : MonoBehaviour
     // 到達倉庫該做的事
     private void SwordMan_OnArrivedStorage(object sender, EventArgs e)
     {
-        SearchNextCow();
+        // SearchNextCow();
 
+    }
+
+    private void SwordMan_OnClick(object sender, EventArgs e)
+    {
+        
+        SwordMan swordMan = sender as SwordMan;
+        SwordManAI swordManAI = swordMan.GetComponent<SwordManAI>();
+        if(selectSwordMan != null)
+        {
+            selectSwordMan.HideSelectCircle();
+        }
+
+        selectSwordMan = swordManAI;
+        
+        selectSwordMan.ShowSelectCircle();
+
+    }
+
+    private void SwordMan_OnAlreadySlayCow(object sender , EventArgs e)
+    {
+        SwordMan swordMan = sender as SwordMan;
+        SearchNextCow(swordMan);
     }
 
     /// <summary>
     /// 搜尋最近的牛
     /// </summary>
-    private void SearchNextCow()
+    
+    private void SearchNextCow(SwordMan swordMan)
     {
         float distance = float.MaxValue;
         Cow returenCow = null;
@@ -94,7 +126,7 @@ public class GameHandler : MonoBehaviour
 
         swordMan.GetComponent<SwordManAI>().SetCow(cows[cows.IndexOf(returenCow)]);
     }
-
+    
 
     /// <summary>
     /// 生成牛
@@ -120,7 +152,7 @@ public class GameHandler : MonoBehaviour
     {
         Cow cow = sender as Cow;
         cows.Remove(cow);
-        SearchNextCow();
+        // SearchNextCow();
 
     }
 
@@ -128,7 +160,11 @@ public class GameHandler : MonoBehaviour
     private void Cow_OnClick(object sender, EventArgs e)
     {
         Cow cow = sender as Cow;
-        swordMan.GetComponent<SwordManAI>().SetCow(cow);
+        if(selectSwordMan != null)
+        {
+            selectSwordMan.SetCow(cow);
+        }
+        
     }
 
     public static Vector3 GetStoragePosition_Static()

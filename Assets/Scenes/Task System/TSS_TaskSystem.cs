@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,12 @@ public class TSS_TaskSystem
         public class ExecuteIdle2 : Task
         {
             
+        }
+
+        public class ExcuteSlayAnimation : Task
+        {
+            public Transform transform;
+            public Action slayAnimation;
         }
     } 
 

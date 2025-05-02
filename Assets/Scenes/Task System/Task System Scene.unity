@@ -1079,6 +1079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pf_SwordMan: {fileID: 3992501324223695178, guid: ffc4601837ed03146909b4ac04db01f0, type: 3}
+  pf_Cow: {fileID: 3733607295319214035, guid: 1a91332fe7e191647afd96804a1e868a, type: 3}
 --- !u!1 &1764652752
 GameObject:
   m_ObjectHideFlags: 0

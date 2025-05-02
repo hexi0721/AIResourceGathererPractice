@@ -74,9 +74,13 @@ public class TSS_SwordManAI : MonoBehaviour
             }
             else if (task is TSS_TaskSystem.Task.ExecuteIdle2)
             {
-                ExeuteTask_Idle2(task as TSS_TaskSystem.Task.MoveToPosition);
+                ExeuteTask_Idle2(task as TSS_TaskSystem.Task.ExecuteIdle2);
             }
-            
+            else if (task is TSS_TaskSystem.Task.ExcuteSlayAnimation)
+            { 
+                ExeuteTask_Slay(task as TSS_TaskSystem.Task.ExcuteSlayAnimation);
+            }
+
         }
     }
 
@@ -88,11 +92,28 @@ public class TSS_SwordManAI : MonoBehaviour
         });
     }
 
-    private void ExeuteTask_Idle2(TSS_TaskSystem.Task.MoveToPosition task)
+    private void ExeuteTask_Idle2(TSS_TaskSystem.Task.ExecuteIdle2 task)
     {
         swordMan.PlayIdle2Animation(() =>
         {
             state = State.WaitingForNextTask;
         });
+    }
+
+    private void ExeuteTask_Slay(TSS_TaskSystem.Task.ExcuteSlayAnimation task)
+    {
+        swordMan.MoveTo(task.transform.position , () =>
+        {
+            swordMan.PlaySlayAnimation(task.transform, () => {
+
+                task.slayAnimation();
+                state = State.WaitingForNextTask;
+            }
+            );
+
+        });
+
+
+        
     }
 }

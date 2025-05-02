@@ -1,16 +1,23 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 using static IUnit;
 
 public class SwordMan : MonoBehaviour , IUnit
 {
 
+    public event EventHandler OnArrivedSotrage;
+    public event EventHandler OnAlreadySlayCow;
+    public event EventHandler OnClick;
+
     Animator animator;
     AnimatorStateInfo stateInfo;
 
     // AI不會用到 手動要用的
-    Rigidbody2D rgbd2D; 
+    Rigidbody2D rgbd2D;
+
+    Button button;
 
     bool AttackDone;
     bool isMoving;
@@ -24,13 +31,12 @@ public class SwordMan : MonoBehaviour , IUnit
 
     public Stat UnitStat { get; private set; }
 
-    public event EventHandler OnArrivedSotrage;
-    
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
         rgbd2D = GetComponent<Rigidbody2D>();
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => { OnClick?.Invoke(this, EventArgs.Empty); });
 
         AttackDone = true;
         isMoving = false;
@@ -42,7 +48,10 @@ public class SwordMan : MonoBehaviour , IUnit
         
     }
 
-
+    private void Start()
+    {
+        
+    }
     /*
     private void FixedUpdate()
     {
@@ -253,18 +262,20 @@ public class SwordMan : MonoBehaviour , IUnit
         LooAt.GetComponent<SpriteRenderer>().color = Color.red;
 
         UnitStat.背負肉的數量 += LooAt.GetComponent<Cow>().DamageBeforeGrabAmount(UnityEngine.Random.Range(1 , 2));
-        
-        yield return new WaitForSeconds(.25f);
 
         // 傷害完 牛有可能死了
+        yield return new WaitForSeconds(.25f);
+        if(LooAt == null)
+        {
+            OnAlreadySlayCow?.Invoke(this, EventArgs.Empty);
+        }
+
         if (LooAt != null)
         {
             
             LooAt.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
-
-
 
     public void PlaySlayAnimationEnd()
     {

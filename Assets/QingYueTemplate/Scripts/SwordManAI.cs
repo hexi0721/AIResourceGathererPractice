@@ -18,19 +18,14 @@ public class SwordManAI : MonoBehaviour
 
     TextMesh textMesh;
 
-    Cow cow;
+    [SerializeField] Cow cow;
     private void Start()
     {
         unit = GetComponent<IUnit>();
         state = State.Idle;
+
         textMesh = transform.Find("InventoryAmount").GetComponent<TextMesh>();
         UpdateTextMesh();
-    }
-
-    private void UpdateTextMesh()
-    {
-        textMesh.text = (unit.UnitStat.璉璽ψ计秖 > 0) ? unit.UnitStat.璉璽ψ计秖.ToString() : "";
-
     }
 
     private void Update()
@@ -48,6 +43,12 @@ public class SwordManAI : MonoBehaviour
                 break;
 
             case State.MovingToCow:
+
+                if (cow == null)
+                {
+                    state = State.Idle;
+                    return;
+                }
 
                 // 耞琌钡絛瞅ず
                 if (Vector3.Distance(transform.position, cow.GetPosition()) <= 1.1f)
@@ -84,10 +85,16 @@ public class SwordManAI : MonoBehaviour
                             return;
                         }
 
-                        // 穝竚
-                        if (cowPostion != cow.GetPosition() && cow != null)
+                        if(cow == null)
+                        {
+
+                            state = State.Idle;
+                            return;
+                        }
+                        else if (cow != null && cowPostion != cow.GetPosition())
                         {
                             state = State.MovingToCow;
+                            return;
                         }
                     });
                 }
@@ -110,6 +117,21 @@ public class SwordManAI : MonoBehaviour
 
     public void SetCow(Cow cow)
     {
-        this.cow = cow;
+        this.cow = cow; 
+    }
+
+    private void UpdateTextMesh()
+    {
+        textMesh.text = (unit.UnitStat.璉璽ψ计秖 > 0) ? unit.UnitStat.璉璽ψ计秖.ToString() : "";
+
+    }
+
+    public void ShowSelectCircle()
+    {
+        transform.Find("SelectCircle").gameObject.SetActive(true);
+    }
+    public void HideSelectCircle()
+    {
+        transform.Find("SelectCircle").gameObject.SetActive(false);
     }
 }

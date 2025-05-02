@@ -1,8 +1,6 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
-
 public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
 {
 
@@ -18,7 +16,7 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
     Animator animator;
     AnimatorStateInfo stateInfo;
 
-    //bool AttackDone;
+    
     
 
     // 是否鎖定目標 是的話繼續追牛 否的話代表回到倉庫
@@ -98,8 +96,11 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
         }
 
         animator.SetBool("isMoving", true);
-        
 
+        float distance = Vector3.Distance(stopPosition , transform.position);
+        Vector3 dir = (stopPosition - transform.position).normalized;
+        
+        stopPosition = stopPosition - dir * 1f;
         position = stopPosition;
 
         StartCoroutine(MoveToCoroutine(action));
@@ -132,6 +133,8 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
     // 播放揮砍動畫
     public void PlaySlayAnimation(Transform LookAt, Action onAnimationCompleted)
     {
+        
+
         Vector3 LookAtPostion = LookAt.position;
         if (LookAtPostion.x > transform.position.x)
         {
@@ -151,7 +154,7 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
             animator.SetFloat("Vertical", -1f);
         }
 
-        //AttackDone = false;
+        
         animator.SetTrigger("Attack");
         StartCoroutine(Cow_OnDamaged_Coroutine(LookAt));
 
@@ -179,12 +182,12 @@ public class TSS_SwordMan : MonoBehaviour , TSS_ISwordMan
         }
     }
 
-    private void PlaySlayAnimationEnd()
+    public void PlaySlayAnimationEnd()
     {
 
         onAnimationCompleted?.Invoke();
         onAnimationCompleted = null;
-        //AttackDone = true;
+        
 
     }
 

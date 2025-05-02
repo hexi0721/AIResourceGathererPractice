@@ -5,6 +5,7 @@ public class TSS_GameHandler : MonoBehaviour
     
     private TSS_TaskSystem taskSystem;
     [SerializeField] private Transform pf_SwordMan;
+    [SerializeField] private Transform pf_Cow;
 
     private void Awake()
     {
@@ -29,9 +30,28 @@ public class TSS_GameHandler : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+            GameObject gameObject = SpawnCow(Utils.GetMouseWorldPosZeroZ());
+            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExcuteSlayAnimation() { transform = gameObject.transform, slayAnimation = () => 
+            { 
+                
+                Destroy(gameObject);
+            }};
+
+            taskSystem.AddTask(task);
+
+
+            /*
             TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExecuteIdle2 {  };
             taskSystem.AddTask(task);
+            */
         }
+    }
+
+    private GameObject SpawnCow(Vector3 position)
+    {
+        Cow cow = Cow.CreateCow(transform , pf_Cow , position);
+
+        return cow.gameObject;
     }
 
 }
