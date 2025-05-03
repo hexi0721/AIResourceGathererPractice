@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class TSS_GameHandler : MonoBehaviour
@@ -10,6 +11,10 @@ public class TSS_GameHandler : MonoBehaviour
     private void Awake()
     {
         taskSystem = new TSS_TaskSystem();
+        StartCoroutine(DeQueueTask(taskSystem));
+
+
+
         TSS_SwordMan swordMan = TSS_SwordMan.Create(pf_SwordMan, Vector3.zero);
         TSS_SwordManAI swordManAI = swordMan.GetComponent<TSS_SwordManAI>();
         swordManAI.SetUp(taskSystem);
@@ -31,19 +36,38 @@ public class TSS_GameHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             GameObject gameObject = SpawnCow(Utils.GetMouseWorldPosZeroZ());
-            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExcuteSlayAnimation() { transform = gameObject.transform, slayAnimation = () => 
-            { 
+            
+
+
+            float slayTime = Time.time + 5f;
+            taskSystem.EnQueueTask(() =>
+            {
+
+                if (Time.time > slayTime)
+                {
+                    TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExcuteSlayAnimation()
+                    {
+                        transform = gameObject.transform,
+                        slayAnimation = () =>
+                        {
+                            Destroy(gameObject);
+                        }
+                    };
+
+                    return task;
+
+                }
+                else
+                {
+                    return null;
+                }
                 
-                Destroy(gameObject);
-            }};
-
-            taskSystem.AddTask(task);
 
 
-            /*
-            TSS_TaskSystem.Task task = new TSS_TaskSystem.Task.ExecuteIdle2 {  };
-            taskSystem.AddTask(task);
-            */
+            });
+
+
+
         }
     }
 
@@ -52,6 +76,17 @@ public class TSS_GameHandler : MonoBehaviour
         Cow cow = Cow.CreateCow(transform , pf_Cow , position);
 
         return cow.gameObject;
+    }
+
+    private IEnumerator DeQueueTask(TSS_TaskSystem taskSystem)
+    {
+        while (true)
+        {
+             
+            taskSystem.DeQueueTask();
+
+            yield return new WaitForSeconds(.2f);
+        }
     }
 
 }
